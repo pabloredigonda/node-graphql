@@ -1,0 +1,27 @@
+version: '2'
+services:
+  base:
+    image: node:11
+    volumes:
+      - gqlnodemodules:/usr/src/service/node_modules
+      - .:/usr/src/service/
+    working_dir: /usr/src/service/
+  install:
+    extends:
+      service: base
+    command: npm i
+  build:
+    extends:
+      service: base
+    command: npm run build
+  worker:
+    extends:
+      service: base
+    command: npm run worker
+  create-bundles:
+    extends:
+      service: base
+    command: npm run create-bundles
+volumes:
+  gqlnodemodules:
+    external: true

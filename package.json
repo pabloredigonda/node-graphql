@@ -1,0 +1,46 @@
+{
+  "name": "MeliChallenge",
+  "description": "Meli 2019 Mutants Challenge",
+  "version": "0.1.0",
+  "dependencies": {
+    "@types/node": "^12.0.2",
+    "apollo-server": "^2.8.1",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "dotenv": "^8.0.0",
+    "graphql": "^14.4.2",
+    "inversify": "^5.0.1",
+    "inversify-express-utils": "^6.3.2",
+    "qs": "^6.0.0",
+    "redis": "^2.8.0",
+    "reflect-metadata": "^0.1.13",
+    "rsmq": "^0.11.0",
+    "rsmq-worker": "^0.5.2",
+    "typed-rest-client": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/express": "^4.17.0",
+    "@types/mocha": "^5.2.7",
+    "@types/mongodb": "^3.1.28",
+    "@types/mongoose": "^5.5.7",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.0.1",
+    "mocha": "^6.1.4",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "standard": "^5.4.1",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "lint": "eslint . --ext .ts",
+    "test": "mocha -r ts-node/register tests/service/FormatterServiceTest.ts",
+    "testWithCoverage": "nyc -r lcov -e .ts -x \"*.test.ts\" mocha -r ts-node/register tests/**/*.test.ts && nyc report",
+    "build": "tsc && cp ./src/server/.env ./dist/.env",
+    "worker": "NODE_PATH=./dist node -r dotenv/config dist/worker.js dotenv_config_path=./dist/.env",
+    "start": "NODE_PATH=./dist node -r dotenv/config dist/index.js dotenv_config_path=./dist/.env"
+  }
+}

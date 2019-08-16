@@ -1,0 +1,36 @@
+module.exports = {
+  apps : [
+	  {
+		  name      : 'Web',
+		  script    : './dist/index.js',
+		  env: {
+			  "DB_HOST":"",
+			  "DB_NAME":"",
+			  "DB_USER":"",
+			  "DB_PASS":"",
+			  "REDIS_HOST":"",
+			  "REDIS_PORT":6379,
+			  "REDIS_QUEUE":"mutant-queue",
+			  "PORT":80
+		  }
+	  },
+	  {
+		    name      : 'Worker',
+		    script    : './dist/worker.js',
+			  env: {
+				  "DB_HOST":"",
+				  "DB_NAME":"",
+				  "DB_USER":"",
+				  "DB_PASS":"",
+				  "REDIS_HOST":"",
+				  "REDIS_PORT":6379,
+				  "REDIS_QUEUE":"mutant-queue",
+				  "PORT":80
+			  }
+	  }
+  ]
+}
+
+
+
+

@@ -1,0 +1,44 @@
+version: '3'
+services:
+  dev:
+    image: node:11
+    container_name: gql-node-container
+    links:
+      - mongodb:DB
+    depends_on: 
+      - mongodb
+    volumes:
+      - gqlnodemodules:/usr/src/service/node_modules
+      - .:/usr/src/service
+    environment:
+      - NODE_ENV=development
+    working_dir: /usr/src/service
+    command: npm run start
+    ports:
+      - 4000:4000
+    networks:
+      - testingnetwork  
+
+  mongodb:
+    image: mongo:3.4
+    container_name: gql-mongo-container    
+    ports:
+     - "27019:27017"
+    volumes:
+     - gqlmongodata:/var/lib/mongodb
+    networks:
+      - testingnetwork    
+  redis:
+    image: redis:latest
+    container_name: gql-redis-container
+    networks:
+      - testingnetwork 
+
+volumes:
+  gqlnodemodules:
+    external: true
+  gqlmongodata:
+    external: true
+networks:
+  testingnetwork:
+    driver: "bridge"
