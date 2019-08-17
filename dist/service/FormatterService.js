@@ -11,6 +11,12 @@ require("reflect-metadata");
 let FormatterService = class FormatterService {
     constructor() {
         this.resultsPerPage = 10;
+        this.result = {
+            prevPage: 0,
+            nextPage: 0,
+            totalPages: 0,
+            movies: []
+        };
     }
     /**
      *
@@ -18,9 +24,10 @@ let FormatterService = class FormatterService {
      * @param page
      */
     format(response, page) {
-        console.log("################");
-        console.log(response);
-        console.log("################");
+        if (response.result.Response === "False") {
+            //error?
+            return this.result;
+        }
         const rows = response.result.Search.length;
         const totalResults = parseInt(response.result.totalResults);
         let result = this.formatPagination(page, totalResults);

@@ -44,7 +44,7 @@ let MoviesResolver = class MoviesResolver {
             const key = `${args.s}-${page}-${type}`;
             let data = yield this.cacheService.get(key);
             if (!data) {
-                console.log("get from db");
+                console.log("get from API");
                 data = yield this.omdbService.search(args.s, type, page);
                 console.log("Set in  cache");
                 this.cacheService.set(key, data);

@@ -11,6 +11,12 @@ import 'reflect-metadata';
 class FormatterService implements FormatterInterface{
 
 	private readonly resultsPerPage: number = 10;
+	private result = {
+		prevPage: 0,
+		nextPage: 0,
+		totalPages: 0,
+		movies: []
+	}	
 
     /**
      * 
@@ -19,9 +25,10 @@ class FormatterService implements FormatterInterface{
      */
 	public format(response: rm.IRestResponse<OmdbResponseBodyInterface>, page :number) {
 		
-		console.log("################");
-		console.log(response);
-		console.log("################");
+		if(response.result.Response === "False"){
+			//error?
+			return this.result;
+		}
 
 		const rows = response.result.Search.length
 		const totalResults = parseInt(response.result.totalResults)

@@ -40,7 +40,7 @@ class MoviesResolver implements ResolverInterface{
         
         if(!data){
                 
-            console.log("get from db")
+            console.log("get from API")
                 
             data = await this.omdbService.search(args.s, type, page)
                 

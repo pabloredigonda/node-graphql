@@ -26,9 +26,9 @@ const typeDefs = gql`
     }
     type Query {
         searchMovies(
-        s: String!, 
-        type: String, 
-        page: Int
+            s: String!, 
+            type: String, 
+            page: Int
         ): SearchResult
     }
 `;

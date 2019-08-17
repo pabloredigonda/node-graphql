@@ -29,6 +29,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const rm = __importStar(require("typed-rest-client/RestClient"));
 const inversify_1 = require("inversify");
+const apollo_server_1 = require("apollo-server");
 const types_1 = require("../types");
 require("reflect-metadata");
 let OmdbService = class OmdbService {
@@ -39,6 +40,8 @@ let OmdbService = class OmdbService {
      * @param formatter FormatterInterface
      */
     constructor(client, apikey, formatter) {
+        //private readonly types: Array<string> = ['movie','episode', 'series']
+        this.types = ['movie', 'episode', 'series'];
         this.client = client;
         this.apikey = apikey;
         this.formatter = formatter;
@@ -51,23 +54,32 @@ let OmdbService = class OmdbService {
      */
     search(s, type, page) {
         return __awaiter(this, void 0, void 0, function* () {
-            //Please fixme!
-            //let querystring = '/?i=tt3896198&apikey='+this.apikey+'&s='+s+'&type=series';
-            let querystring = '/?apikey=' + this.apikey + '&s=' + s;
-            if (type) {
-                querystring += '&type=' + type;
-            }
-            if (page) {
-                querystring += '&page=' + page;
-            }
-            let response = yield this.client.get(querystring);
+            const queryString = this.buildQuery(s, type, page);
+            let response = yield this.client.get(queryString);
             //Error handler
             //@TODO handle errors
-            if (response.result.Response === "False") {
-                //error?
-            }
             return this.formatter.format(response, page);
         });
+    }
+    /**
+     *
+     * @param s
+     * @param type
+     * @param page
+     */
+    buildQuery(s, type, page) {
+        //Please fixme!
+        let querystring = '/?apikey=' + this.apikey + '&s=' + s;
+        if (type) {
+            if (!this.types.includes(type)) {
+                throw new apollo_server_1.ApolloError("The type value should by in the following list :[movie,episode, series]");
+            }
+            querystring += '&type=' + type;
+        }
+        if (page) {
+            querystring += '&page=' + page;
+        }
+        return querystring;
     }
 };
 OmdbService = __decorate([
