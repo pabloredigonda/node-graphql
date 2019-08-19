@@ -40,7 +40,6 @@ let OmdbService = class OmdbService {
      * @param formatter FormatterInterface
      */
     constructor(client, apikey, formatter) {
-        //private readonly types: Array<string> = ['movie','episode', 'series']
         this.types = ['movie', 'episode', 'series'];
         this.client = client;
         this.apikey = apikey;

@@ -32,7 +32,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .ts",
-    "test": "mocha -r ts-node/register tests/service/FormatterServiceTest.ts",
+    "test": "mocha -r ts-node/register tests/*/*.test.ts",
     "testWithCoverage": "nyc -r lcov -e .ts -x \"*.test.ts\" mocha -r ts-node/register tests/**/*.test.ts && nyc report",
     "build": "tsc && cp ./src/server/.env ./dist/.env",
     "worker": "NODE_PATH=./dist node -r dotenv/config dist/worker.js dotenv_config_path=./dist/.env",

@@ -38,14 +38,8 @@ class MoviesResolver implements ResolverInterface{
             
         let data = await this.cacheService.get(key)
         
-        if(!data){
-                
-            console.log("get from API")
-                
+        if(!data){                               
             data = await this.omdbService.search(args.s, type, page)
-                
-            console.log("Set in  cache")	
-                   
             this.cacheService.set(key, data)
         }
 

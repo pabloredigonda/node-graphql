@@ -5,9 +5,9 @@ dotenv.config({path: '/usr/src/service/dist/.env'});
 import { expect, assert } from 'chai'
 import {RedisClient} from 'redis'
 import 'reflect-metadata'
-import { container } from "../../src/server/inversify.config"
+import container from "../../src/server/dependencies"
 import { TYPES } from "../../src/server/types"
-import { RedisServiceInterface } from "../../src/server/interfaces"
+import RedisServiceInterface from "../../src/server/interfaces/RedisServiceInterface"
 
 const redisService = container.get<RedisServiceInterface>(TYPES.RedisServiceInterface)
 
