@@ -6,9 +6,9 @@ import { expect, assert } from 'chai'
 import sinon from 'sinon'
 import {RedisClient} from 'redis'
 import 'reflect-metadata'
-import container from "../../src/server/dependencies"
-import { TYPES } from "../../src/server/types"
-import OmdbServiceInterface from "../../src/server/interfaces/OmdbServiceInterface"
+import container from "../../src/dependencies"
+import { TYPES } from "../../src/types"
+import OmdbServiceInterface from "../../src/interfaces/OmdbServiceInterface"
 
 let output = {
 	"movies": [

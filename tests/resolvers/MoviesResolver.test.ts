@@ -6,9 +6,9 @@ import { expect, assert } from 'chai'
 import sinon from 'sinon'
 import {RedisClient} from 'redis'
 import 'reflect-metadata'
-import container from "../../src/server/dependencies"
-import { TYPES } from "../../src/server/types"
-import ResolverInterface from "../../src/server/interfaces/ResolverInterface"
+import container from "../../src/dependencies"
+import { TYPES } from "../../src/types"
+import ResolverInterface from "../../src/interfaces/ResolverInterface"
 
 let outputFromCache = {
 	"movies": [
@@ -80,7 +80,7 @@ describe('MoviesResolverShould', function() {
         container.rebind(TYPES.OmdbServiceInterface).toConstantValue(OmdbServiceMock)
 		container.rebind(TYPES.CacheServiceInterface).toConstantValue(CacheServiceMock)
 
-		const resolver = container.get<ResolverInterface>(TYPES.ResolverInterface)
+		const resolver = container.get<ResolverInterface>(TYPES.MoviesResolver)
 		let params = {s:"ninja", page:2}
 		let data = await resolver.resolve(params)
 		expect(data).to.deep.equal(outputFromCache);
@@ -91,7 +91,7 @@ describe('MoviesResolverShould', function() {
         container.rebind(TYPES.OmdbServiceInterface).toConstantValue(OmdbServiceMock)
 		container.rebind(TYPES.CacheServiceInterface).toConstantValue(CacheServiceEmptyMock)
 
-		const resolver = container.get<ResolverInterface>(TYPES.ResolverInterface)
+		const resolver = container.get<ResolverInterface>(TYPES.MoviesResolver)
 		let params = {s:"ninja", page:2}
 		let data = await resolver.resolve(params)
 		expect(data).to.deep.equal(outputFromDB);

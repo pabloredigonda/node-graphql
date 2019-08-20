@@ -27,4 +27,22 @@ Run:
 			totalPages
 		}
 	}
+
+## Headers
+	{
+		{
+			"Authorization": "Bearer asdasd"
+		}
+	}	
+
+
+## Login
+	{
+		mutation {
+			login(email:"test@mail.com", password:"testpassword"){
+    			token
+    			userId
+  			}
+		}
+	}	
  

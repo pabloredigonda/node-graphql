@@ -5,10 +5,10 @@ dotenv.config({path: '/usr/src/service/dist/.env'});
 import { expect, assert } from 'chai'
 import sinon from 'sinon'
 import 'reflect-metadata'
-import container from "../../src/server/dependencies"
-import { TYPES } from "../../src/server/types"
-import RedisServiceInterface from "../../src/server/interfaces/RedisServiceInterface"
-import CacheServiceInterface from "../../src/server/interfaces/CacheServiceInterface"
+import container from "../../src/dependencies"
+import { TYPES } from "../../src/types"
+import RedisServiceInterface from "../../src/interfaces/RedisServiceInterface"
+import CacheServiceInterface from "../../src/interfaces/CacheServiceInterface"
 
 
 let jsonString = "{\n    \"count_mutant_dna\": 1,\n    \"count_human_dna\": 1,\n    \"ratio\": 1\n}"
